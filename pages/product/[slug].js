@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { client, urlFor } from '../../lib/client';
 import { AiOutlineStar, AiFillStar, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { Product } from '../../components';
+import { useStateContext } from '../../context/StateContext';
 
 const ProductDetails = ({ product_query_req, similar_products_query_req }) => {
 
-  const { image, name, details, price } = product_query_req;
+  const { qty, incQty, decQty, onAdd } = useStateContext();
+
   const products = similar_products_query_req;
+  const product = product_query_req;
+  const { image, name, details, price } = product;
 
   const [index, setIndex] = useState(0);
 
@@ -19,7 +23,7 @@ const ProductDetails = ({ product_query_req, similar_products_query_req }) => {
           </div>
           <div className='small-images-container'>
             {image?.map((item, i)=>(
-              <img src={urlFor(item)} className={i===index?'small-image selected-image':'small-image'} onMouseEnter={()=>{setIndex(i)}} />
+              <img src={urlFor(item)} key={i} className={i===index?'small-image selected-image':'small-image'} onMouseEnter={()=>{setIndex(i)}} />
             ))}
           </div>
         </div>
@@ -43,14 +47,14 @@ const ProductDetails = ({ product_query_req, similar_products_query_req }) => {
           <div className='quantity'>
             <h3>Quantity:</h3>
             <p className='quantity-desc'>
-              <span className='minus' onClick=""><AiOutlineMinus /></span>
-              <span className='num' onClick="">0</span>
-              <span className='plus' onClick=""><AiOutlinePlus /></span>
+              <span className='minus' onClick={decQty}><AiOutlineMinus /></span>
+              <span className='num'>{qty}</span>
+              <span className='plus' onClick={incQty}><AiOutlinePlus /></span>
             </p>
           </div>
           <div className="buttons">
-            <button type="button" className='add-to-cart' onClick="">Add to Cart</button>
-            <button type="button" className='buy-now' onClick="">Buy Now</button>
+            <button type="button" className='add-to-cart' onClick={()=>{onAdd(product, qty)}}>Add to Cart</button>
+            <button type="button" className='buy-now'>Buy Now</button>
           </div>
         </div>
       </div>
