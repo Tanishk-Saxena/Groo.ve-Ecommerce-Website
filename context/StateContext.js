@@ -12,14 +12,14 @@ export const StateContext = ({ children }) => {
 
     useEffect(() => {
         setCartItems(JSON.parse(localStorage.getItem('lsCartItems')) || []);
-        setTotalPrice(localStorage.getItem('lsTotalPrice') || 0);
-        setTotalQuantities(localStorage.getItem('lsTotalQuantities') || 0);
+        setTotalPrice(JSON.parse(localStorage.getItem('lsTotalPrice')) || 0);
+        setTotalQuantities(JSON.parse(localStorage.getItem('lsTotalQuantities')) || 0);
     }, []);
 
     useEffect(() => {
         localStorage.setItem('lsCartItems', JSON.stringify(cartItems));
-        localStorage.setItem('lsTotalPrice', totalPrice);
-        localStorage.setItem('lsTotalQuantities', totalQuantities);
+        localStorage.setItem('lsTotalPrice', JSON.stringify(totalPrice));
+        localStorage.setItem('lsTotalQuantities', JSON.stringify(totalQuantities));
     }, [cartItems, totalPrice, totalQuantities]);
     
 
