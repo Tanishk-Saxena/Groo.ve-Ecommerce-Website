@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
@@ -9,7 +9,6 @@ import getStripe from '../lib/getStripe';
 
 const Cart = () => {
 
-  const cartRef = useRef();
   const { totalPrice, totalQuanitites, cartItems, setShowCart, toggleCartItemQuantity, onRemove } = useStateContext();
 
   const handleCheckout = async () => {
@@ -32,7 +31,7 @@ const Cart = () => {
   }
 
   return (
-    <div className='cart-wrapper' ref={cartRef}>
+    <div className='cart-wrapper'>
       <div className="cart-container">
         <button type="button" className='cart-heading' onClick={()=>{setShowCart(false)}}>
           <AiOutlineLeft />

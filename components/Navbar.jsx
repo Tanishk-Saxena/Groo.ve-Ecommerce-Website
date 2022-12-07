@@ -10,9 +10,11 @@ const Navbar = () => {
   
   return (
     <div className='navbar-container'>
-      <p className='logo'>
+      <p className='logo brand-text-animation'>
         <Link href="/">
-          SoundWare
+          <span>
+            Groo<span style={{color: '#cccc10'}}>.</span>ve
+          </span>
         </Link>
       </p>
 

@@ -8,8 +8,8 @@ const Home  = ({products_query_req, banner_query_req}) => {
       <HeroBanner heroBanner = {banner_query_req.length && banner_query_req[0]}/>
 
       <div className='products-heading'>
-        <h2>Best Selling Products</h2>
-        <p>Speakers of many variations</p>
+        <h2 className='text-animation' style={{display: 'inline'}}>Best Selling Products</h2>
+        <p style={{fontWeight: '400', fontSize: '17px', lineHeight: '30px'}}>Speakers of many variations</p>
       </div>
       <div className='products-container'>
         {products_query_req?.map((product)=>(<Product key={product._id} product={product}/>))}

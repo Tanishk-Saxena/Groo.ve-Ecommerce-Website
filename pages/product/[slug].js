@@ -6,11 +6,12 @@ import { useStateContext } from '../../context/StateContext';
 
 const ProductDetails = ({ product_query_req, similar_products_query_req }) => {
 
-  const { onAdd } = useStateContext();
+  const { onAdd, setShowCart } = useStateContext();
 
   const products = similar_products_query_req;
   const product = product_query_req;
-  const { image, name, details, price, setShowCart } = product;
+  const { image, name, details, price, rating, no_of_ratings } = product;
+  const roundOffRating = Math.round(rating);
 
   const [index, setIndex] = useState(0);
   const [qty, setQty] = useState(1);
@@ -48,14 +49,18 @@ const ProductDetails = ({ product_query_req, similar_products_query_req }) => {
           <h1>{name}</h1>
           <div className='reviews'>
             <div>
-              <AiFillStar />
-              <AiFillStar />
-              <AiFillStar />
-              <AiFillStar />
-              <AiOutlineStar />
+              {
+                [...Array(5)].map((item, index) => {
+                  if(index+1 <= roundOffRating) {
+                    return <span key={index}><AiFillStar /></span>
+                  } else {
+                    return <span key={index}><AiOutlineStar /></span>
+                  }
+                })
+              }
             </div>
             <p>
-              (20)
+              ({no_of_ratings})
             </p>
           </div>
           <h4>Details: </h4>
@@ -75,8 +80,8 @@ const ProductDetails = ({ product_query_req, similar_products_query_req }) => {
           </div>
         </div>
       </div>
-      <div className='maylike-products-wrapper'>
-          <h2>You may also like</h2>
+      <div className='maylike-products-wrapper' style={{textAlign: 'center'}}>
+          <h2 className='text-animation' style={{width: 'fit-content', margin: '50px auto', cursor: 'default'}}>You may also like</h2>
           <div className='marquee'>
             <div className="maylike-products-container track">
               {products.map((product)=>(<Product key={product._id} product={product} />))}

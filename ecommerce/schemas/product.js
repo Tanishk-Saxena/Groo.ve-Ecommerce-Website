@@ -18,11 +18,16 @@ export default {
             type: 'string'
         },
         {
+            name: 'type',
+            title: 'Type',
+            type: 'string'
+        },
+        {
             name: 'slug',
             title: 'Slug',
             type: 'slug',
             options: {
-                source: 'name',
+                source: 'type',
                 maxLength: 90,
             }
         },
@@ -35,6 +40,17 @@ export default {
             name: 'details',
             title: 'Details',
             type: 'string'
+        },
+        {
+            name: 'rating',
+            title: 'Rating',
+            type: 'number',
+            validation: Rule => Rule.max(5)
+        },
+        {
+            name: 'no_of_ratings',
+            title: 'No. of ratings',
+            type: 'number'
         }
     ]
 }

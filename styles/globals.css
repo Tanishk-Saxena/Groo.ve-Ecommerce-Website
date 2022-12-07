@@ -26,6 +26,90 @@ width: 100%;
   padding: 10px;
 }
 
+.brand-text-animation {
+  position: relative;
+}
+
+.brand-text-animation:after {
+  content: '';
+  background-color: #efff14;
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-in-out;
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: scaleX(0);
+    transform-origin: bottom left;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .brand-text-animation:after {
+    transform: none;
+    animation: 1s ease-in-out 0s 1 slideInLeft;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .brand-text-animation:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+}
+
+.text-animation {
+  position: relative;
+}
+
+.text-animation:after {
+  content: '';
+  background-color: #efff14;
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  bottom: -4px;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-in-out;
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: scaleX(0);
+    transform-origin: bottom left;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .text-animation:after {
+    transform: none;
+    animation: 1s ease-in-out 0s 1 slideInLeft;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .text-animation:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+}
+
 .navbar-container{
   display: flex;
   justify-content: space-between;
@@ -61,12 +145,13 @@ width: 100%;
 }
 
  span.text-red {
-    -webkit-text-stroke: 1px #f02d34;
+    -webkit-text-stroke: 1px #efff14;
     margin-left: 6px;
 }
 .logo{
-  color: gray;
-  font-size: 18px;
+  color: rgb(10, 10, 10);
+  font-size: 32px;
+  font-weight: 700;
 
 }
 .cart-icon{
@@ -79,14 +164,14 @@ width: 100%;
   background-color: transparent;
 }
 .cart-icon:hover{
-  transform: scale(1.1,1.1);
+  transform: scale(1.2,1.2);
 }
 .cart-item-qty{
   position: absolute;
   right: -8px;
   font-size: 12px;
-  color: #eee;
-  background-color: #f02d34;
+  color: black;
+  background-color: #efff14;
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -106,7 +191,7 @@ width: 100%;
  cursor: pointer;
   transform: scale(1, 1);
   transition: transform 0.5s ease;
- color: #324d67;
+ color: #1a1a1a;
 
 }
 .product-card:hover{
@@ -130,10 +215,9 @@ width: 100%;
 
 .hero-banner-container{
   padding: 100px 40px;
-  background-color: #dcdcdc;
+  background-color: #efff14;
   border-radius: 15px;
   position: relative;
-  height: 500px;
   line-height: 0.9; 
   width: 100%;
 
@@ -144,7 +228,7 @@ width: 100%;
 .hero-banner-container button{
    border-radius: 15px;
   padding: 10px 16px;
-  background-color: #f02d34;
+  background-color: black;
   color: white;
   border: none;
   margin-top: 40px;
@@ -160,7 +244,7 @@ width: 100%;
 }
 .hero-banner-container h1{
   color: white;
-  font-size: 10em;
+  font-size: 9em;
   margin-left: -20px;
   text-transform: uppercase;
 }
@@ -181,7 +265,7 @@ width: 300px;
 line-height: 1.3;
 display: flex;
 flex-direction: column;
- color: #324d67;
+ color: #1a1a1a;
 
 }
 .desc p{
@@ -199,7 +283,7 @@ text-align: end;
 .products-heading{
   text-align: center;
   margin: 40px 0px;
- color: #324d67;
+ color: #1a1a1a;
 
 }
 .products-heading h2{
@@ -212,12 +296,12 @@ text-align: end;
 }
 .footer-banner-container{
   padding: 100px 40px;
-  background-color: #f02d34;
+  background-color: #efff14;
   border-radius: 15px;
   position: relative;
   height: 400px;
   line-height: 1; 
-  color: white;
+  color: black;
   width: 100%;
   margin-top: 120px;
 }
@@ -228,8 +312,8 @@ text-align: end;
 .banner-desc button{
   border-radius: 15px;
   padding: 10px 16px;
-  background-color: white;
-  color: red;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   border: none;
   margin-top: 40px;
   font-size: 18px;
@@ -243,6 +327,7 @@ text-align: end;
 }
 .banner-desc .left p{
   margin:18px;
+  font-weight: 600;
 }
 .footer-banner-image{
   position: absolute;
@@ -260,6 +345,7 @@ text-align: end;
 }
 .banner-desc .right p{
   font-size: 18px;
+  font-weight: 600;
 }
 .banner-desc .right .company-desc{
   font-size: 14px;
@@ -274,8 +360,8 @@ text-align: end;
   z-index: 100;
   /* will-change: transform; */
   transition: all 1s ease-in-out;
-
 }
+
 .cart-container{
   height: 100vh;
   width: 600px;
@@ -283,11 +369,12 @@ text-align: end;
   float: right;
   padding: 40px 10px;
   position: relative;
+  transition: all 1s ease-in-out;
   
 }
 
 .footer-container{
-  color: #324d67;
+  color: #1a1a1a;
   text-align: center;
   margin-top: 20px;
   padding: 30px 10px;
@@ -321,7 +408,11 @@ text-align: end;
 }
 .cart-num-items{
   margin-left: 10px;
-  color: #f02d34;
+  color: #000;
+  text-decoration: underline;
+  text-decoration-color: #efff14;
+  text-underline-offset: 7px;
+  text-decoration-thickness: 6px;
 }
 .empty-cart{
   margin:40px;
@@ -355,7 +446,7 @@ padding: 20px 10px;
   display: flex;
   justify-content: space-between;
   width: 350px;
-   color: #324d67;
+   color: #1a1a1a;
 
 }
 .item-desc .bottom{
@@ -377,7 +468,7 @@ padding: 20px 10px;
 }
 .remove-item{
   font-size: 24px;
-  color: #f02d34;
+  color: #000;
   cursor: pointer;
   background: transparent;
   border: none;
@@ -402,11 +493,12 @@ padding: 30px 65px;
   border-radius: 15px;
   border: none;
   font-size: 20px;
+  font-weight: 600;
   margin-top: 10px;
   margin-top: 40px;
   text-transform: uppercase;
-  background-color: #f02d34;
-  color: #fff;
+  background-color: #efff14;
+  color: #000;
   cursor: pointer;
     transform: scale(1, 1);
   transition: transform 0.5s ease;
@@ -419,7 +511,7 @@ padding: 30px 65px;
  gap: 40px;
  margin: 40px;
  margin-top: 60px;
- color: #324d67;
+ color: #1a1a1a;
 
 }
 
@@ -433,7 +525,7 @@ padding: 30px 65px;
   transition: .3s ease-in-out;
 }
 .product-detail-image:hover{
-  background-color: #f02d34;
+  background-color: #efff14;
 
 }
 .small-images-container{
@@ -450,10 +542,10 @@ padding: 30px 65px;
 }
 
 .selected-image{
-  background-color:#f02d34;
+  background-color:#efff14;
 }
 .reviews{
-  color: #f02d34;
+  color: #efff14;
   margin-top: 10px;
   display: flex;
   gap: 5px;
@@ -467,14 +559,14 @@ padding: 30px 65px;
   margin-top: 10px;
 }
 .reviews p{
-  color: #324d67;
+  color: #1a1a1a;
   margin-top: 0px;
 }
 .product-detail-desc .price{
   font-weight: 700 ;
   font-size: 26px;
   margin-top: 30px;
-  color:#f02d34;
+  color:#efff14;
 }
 .price .old-price, .product-price .old-price, .price .old-price{
   color: gray;
@@ -492,12 +584,12 @@ padding: 30px 65px;
 }
 .buttons .add-to-cart{
   padding: 10px 20px;
-  border: 1px solid #f02d34 ;
+  border: 1px solid #efff14 ;
   margin-top: 40px;
   font-size: 18px;
   font-weight: 500;
-  background-color: white;
-  color: #f02d34;
+  background-color: black;
+  color: #efff14;
   cursor: pointer;
   width: 200px;
    transform: scale(1, 1);
@@ -510,8 +602,8 @@ padding: 30px 65px;
   width: 200px;
 
   padding: 10px 20px;
-  background-color: #f02d34;
-  color: white;
+  background-color: #efff14;
+  color: black;
   border: none;
   margin-top: 40px;
   font-size: 18px;
@@ -551,7 +643,7 @@ padding: 6px;
 .maylike-products-wrapper h2{
   text-align: center;
   margin: 50px;
-  color: #324d67;
+  color: #1a1a1a;
 
   font-size: 28px;
 }
@@ -563,7 +655,7 @@ padding: 6px;
 }
 .max-qty{
   font-weight: 500;
-  color: #f02d34;
+  color: #efff14;
 }
 .success-wrapper, .cancel-wrapper{
   background-color: white;
@@ -592,7 +684,7 @@ margin-top: 160px;
   margin-top: 15px 0px;
   font-weight: 900;
   font-size: 40px;
-  color:#324d67;
+  color:#1a1a1a;
 }
 .success .email-msg{
    font-size: 16px;
@@ -612,7 +704,7 @@ margin-top: 160px;
 }
 .success .description .email{
   margin-left: 5px;
-  color: #f02d34;
+  color: #efff14;
 }
 .product-max-qty{
   margin-top: 10px;
@@ -724,7 +816,7 @@ margin-top: 160px;
 }
 .flex h5{
   font-size: 16px;
-   color: #324d67;
+   color: #1a1a1a;
 }
 .flex h4{
   font-size: 16px;
