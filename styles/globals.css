@@ -704,7 +704,11 @@ margin-top: 160px;
 }
 .success .description .email{
   margin-left: 5px;
-  color: #efff14;
+  color: black;
+  text-decoration: underline;
+  text-decoration-color: #efff14;
+  text-underline-offset: 7px;
+  text-decoration-thickness: 6px;
 }
 .product-max-qty{
   margin-top: 10px;
