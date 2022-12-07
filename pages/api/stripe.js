@@ -7,7 +7,7 @@ export default async function handler(req, res) {
         submit_type: 'pay',
         mode: 'payment',
         payment_method_types: ['card'],
-        billing_address_collection: 'auto',
+        shipping_address_collection: {allowed_countries: ['IN']},
         shipping_options: [
           {
             shipping_rate: 'shr_1MCHDuSCN5AAvz988D0kHprt'
@@ -35,8 +35,8 @@ export default async function handler(req, res) {
             quantity: item.quantity
           }
         }),
-        success_url: `${req.headers.origin}/?success`,
-        cancel_url: `${req.headers.origin}/?canceled`,
+        success_url: `${req.headers.origin}/success`,
+        cancel_url: `${req.headers.origin}/`,
       }
       const session = await stripe.checkout.sessions.create(params);
       res.status(200).json(session);
