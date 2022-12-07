@@ -9,7 +9,19 @@ export const StateContext = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [totalQuantities, setTotalQuantities] = useState(0);
-    const [qty, setQty] = useState(1);
+
+    useEffect(() => {
+        setCartItems(JSON.parse(localStorage.getItem('lsCartItems')) || []);
+        setTotalPrice(localStorage.getItem('lsTotalPrice') || 0);
+        setTotalQuantities(localStorage.getItem('lsTotalQuantities') || 0);
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('lsCartItems', JSON.stringify(cartItems));
+        localStorage.setItem('lsTotalPrice', totalPrice);
+        localStorage.setItem('lsTotalQuantities', totalQuantities);
+    }, [cartItems, totalPrice, totalQuantities]);
+    
 
     let foundProduct;
     let index;
@@ -17,8 +29,7 @@ export const StateContext = ({ children }) => {
     const onAdd = (product, quantity) => {
         const checkProductInCart = cartItems.find((item)=>(item._id===product._id));
         setTotalPrice((prevTotalPrice) => (prevTotalPrice + product.price*quantity));
-        setTotalQuantities((prevTotalQuantities)=>(prevTotalQuantities + quantity));
-
+        setTotalQuantities((prevTotalQuantities)=>(prevTotalQuantities + quantity));      
         if(checkProductInCart) {
             const updateCartItems = cartItems.map((cartProduct) => {
                 if(cartProduct._id === product._id) {
@@ -26,18 +37,20 @@ export const StateContext = ({ children }) => {
                         ...cartProduct,
                         quantity: cartProduct.quantity + quantity
                     }
+                } else {
+                    return cartProduct
                 }
             })
-
+            
             setCartItems(updateCartItems);
         } else {
             product.quantity = quantity;
             
             setCartItems([ ...cartItems, { ...product } ]);
         }
-        toast.success(`${qty} ${product.name} added successfully to the cart.`);
+        toast.success(`${quantity} ${product.name} added successfully to the cart.`);
     }
-
+    
     const onRemove = (product) => {
         foundProduct = cartItems.find((item)=>(item._id === product._id));
         const newCartItems = cartItems.filter((item)=>(item._id !== product._id));
@@ -75,19 +88,8 @@ export const StateContext = ({ children }) => {
         }
     }
 
-    const incQty = () => {
-        setQty((prevQty) => (prevQty + 1));
-    }
-
-    const decQty = () => {
-        setQty((prevQty) => {
-            if(prevQty - 1 < 1) return 1;
-            return prevQty - 1;
-        });
-    }
-
     return (
-        <Context.Provider value={{showCart, cartItems, totalPrice, totalQuantities, qty, incQty, decQty, onAdd, setShowCart, toggleCartItemQuantity, onRemove, setCartItems, setTotalPrice, setTotalQuantities}}>
+        <Context.Provider value={{showCart, cartItems, totalPrice, totalQuantities, onAdd, setShowCart, toggleCartItemQuantity, onRemove, setCartItems, setTotalPrice, setTotalQuantities}}>
             {children}
         </Context.Provider>
     )

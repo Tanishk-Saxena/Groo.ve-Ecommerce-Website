@@ -6,13 +6,25 @@ import { useStateContext } from '../../context/StateContext';
 
 const ProductDetails = ({ product_query_req, similar_products_query_req }) => {
 
-  const { qty, incQty, decQty, onAdd } = useStateContext();
+  const { onAdd } = useStateContext();
 
   const products = similar_products_query_req;
   const product = product_query_req;
   const { image, name, details, price, setShowCart } = product;
 
   const [index, setIndex] = useState(0);
+  const [qty, setQty] = useState(1);
+  
+  const incQty = () => {
+      setQty((prevQty) => (prevQty + 1));
+  }
+
+  const decQty = () => {
+      setQty((prevQty) => {
+          if(prevQty - 1 < 1) return 1;
+          return prevQty - 1;
+      });
+  }
 
   const handleBuyNow = () => {
     onAdd(product, qty);
