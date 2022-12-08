@@ -2,7 +2,17 @@ import React from 'react';
 import Link from 'next/link';
 import { urlFor } from '../lib/client';
 
-const FooterBanner = ({ footerBanner: { discount, largeText1, largeText2, saleTime, smallText, midText, desc, product, buttonText, image } }) => {
+const FooterBanner = ({ footerBanner: { discount, largeText1, largeText2, saleTime, smallText, midText, desc, type, product, buttonText, image } }) => {
+
+  let slug1 = type.toLowerCase();
+  let slug2 = product.toLowerCase();
+  console.log(slug1 + '/' + slug2);
+  slug1 = slug1.replaceAll(' ', '-');
+  slug1 = slug1.replaceAll('.', '-');
+  slug2 = slug2.replaceAll(' ', '-');
+  slug2 = slug2.replaceAll('.', '-');
+  console.log(slug1 + '/' + slug2);
+
   return (
     <div className='footer-banner-container'>
       <div className="banner-desc">
@@ -16,7 +26,7 @@ const FooterBanner = ({ footerBanner: { discount, largeText1, largeText2, saleTi
           <p>{smallText}</p>
           <h3>{midText}</h3>
           <p>{desc}</p>
-          <Link href={`/product/${product}`}>
+          <Link href={`/product/${slug1}/${slug2}`}>
             <button type='button'>{buttonText}</button>
           </Link>
         </div>

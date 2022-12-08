@@ -23,11 +23,20 @@ export default {
             type: 'string'
         },
         {
-            name: 'slug',
-            title: 'Slug',
+            name: 'slug1',
+            title: 'Slug1',
             type: 'slug',
             options: {
                 source: 'type',
+                maxLength: 90,
+            }
+        },
+        {
+            name: 'slug2',
+            title: 'Slug2',
+            type: 'slug',
+            options: {
+                source: 'name',
                 maxLength: 90,
             }
         },

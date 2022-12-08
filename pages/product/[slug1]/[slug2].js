@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { client, urlFor } from '../../lib/client';
+import { client, urlFor } from '../../../lib/client';
 import { AiOutlineStar, AiFillStar, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
-import { Product } from '../../components';
-import { useStateContext } from '../../context/StateContext';
+import { Product } from '../../../components';
+import { useStateContext } from '../../../context/StateContext';
+import Head from 'next/head';
 
 const ProductDetails = ({ product_query_req, similar_products_query_req }) => {
 
@@ -10,7 +11,7 @@ const ProductDetails = ({ product_query_req, similar_products_query_req }) => {
 
   const products = similar_products_query_req;
   const product = product_query_req;
-  const { image, name, details, price, rating, no_of_ratings } = product;
+  const { image, name, type, details, price, rating, no_of_ratings } = product;
   const roundOffRating = Math.round(rating);
 
   const [index, setIndex] = useState(0);
@@ -34,6 +35,9 @@ const ProductDetails = ({ product_query_req, similar_products_query_req }) => {
 
   return (
     <div>
+      <Head>
+        <title>{name}</title>
+      </Head>
       <div className='product-detail-container'>
         <div>
           <div className='image-container'>
@@ -47,6 +51,7 @@ const ProductDetails = ({ product_query_req, similar_products_query_req }) => {
         </div>
         <div className="product-detail-desc">
           <h1>{name}</h1>
+          <h3>{type}</h3>
           <div className='reviews'>
             <div>
               {
@@ -92,11 +97,11 @@ const ProductDetails = ({ product_query_req, similar_products_query_req }) => {
   )
 }
 
-export const getStaticProps = async ({ params: { slug } }) => {
-  const product_query = `*[_type == "product" && slug.current == "${slug}"][0]`;
+export const getStaticProps = async ({ params: { slug1, slug2 } }) => {
+  const product_query = `*[_type == "product" && slug2.current == "${slug2}"][0]`;
   const product_query_req = await client.fetch(product_query);
 
-  const similar_products_query = `*[_type == "product" && slug.current != "${slug}"]`;
+  const similar_products_query = `*[_type == "product" && slug.current != "${slug2}"]`;
   const similar_products_query_req = await client.fetch(similar_products_query);
 
   return {
@@ -109,7 +114,10 @@ export const getStaticProps = async ({ params: { slug } }) => {
 
 export const getStaticPaths = async ({}) => {
   const query = `*[_type == "product"] {
-    slug {
+    slug1 {
+      current
+    },
+    slug2 {
       current
     }
   }`;
@@ -118,7 +126,8 @@ export const getStaticPaths = async ({}) => {
 
   const paths = products.map((product)=>({
     params: {
-      slug: product.slug.current
+      slug1: product.slug1.current,
+      slug2: product.slug2.current
     }
   }));
 

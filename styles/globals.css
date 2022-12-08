@@ -152,7 +152,7 @@ width: 100%;
   color: rgb(10, 10, 10);
   font-size: 32px;
   font-weight: 700;
-
+  cursor: pointer;
 }
 .cart-icon{
   font-size: 25px;
@@ -338,6 +338,7 @@ text-align: end;
 }
 .banner-desc .right{
   line-height: 1.4;
+  text-align: right;
 }
 .banner-desc .right h3{
   font-weight: 800;

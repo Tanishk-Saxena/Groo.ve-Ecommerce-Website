@@ -22,6 +22,11 @@ export default {
             type: 'string',
         },
         {
+            name: 'type',
+            title: 'Type',
+            type: 'string'
+        },
+        {
             name: 'desc',
             title: 'Desc',
             type: 'string',
